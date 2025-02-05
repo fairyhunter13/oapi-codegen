@@ -731,10 +731,26 @@ func GenFieldsFromProperties(props []Property) []string {
 			if p.NeedsFormTag {
 				fieldTags["form"] = p.JsonFieldName
 			}
+			if len(p.Schema.EnumValues) > 0 {
+				var enumValues []string
+				for _, v := range p.Schema.EnumValues {
+					enumValues = append(enumValues, v)
+				}
+
+				fieldTags["validate"] = fmt.Sprintf("oneof=%s", strings.Join(enumValues, " "))
+			}
 		} else {
 			fieldTags["json"] = p.JsonFieldName + ",omitempty"
 			if p.NeedsFormTag {
 				fieldTags["form"] = p.JsonFieldName + ",omitempty"
+			}
+			if len(p.Schema.EnumValues) > 0 {
+				var enumValues []string
+				for _, v := range p.Schema.EnumValues {
+					enumValues = append(enumValues, v)
+				}
+
+				fieldTags["validate"] = fmt.Sprintf("omitempty,oneof=%s", strings.Join(enumValues, " "))
 			}
 		}
 
