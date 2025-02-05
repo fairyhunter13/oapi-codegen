@@ -1,3 +1,3 @@
 package issue1298
 
-//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen --config=config.yaml issue1298.yaml
+//go:generate go run github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen --config=config.yaml issue1298.yaml

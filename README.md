@@ -18,10 +18,10 @@ With `oapi-codegen`, there are a few [Key Design Decisions](#key-design-decision
 
 ## Action Required: The repository for this project has changed
 
-As announced in [May 2024](https://github.com/oapi-codegen/oapi-codegen/discussions/1605),
+As announced in [May 2024](https://github.com/fairyhunter13/oapi-codegen/discussions/1605),
 we have moved the project from the deepmap organization to our own organization, and you will need to update your
 import paths to pull updates past this point. You need to do a recursive search/replace from
-`github.com/deepmap/oapi-codegen/v2` to `github.com/oapi-codegen/oapi-codegen/v2`.
+`github.com/deepmap/oapi-codegen/v2` to `github.com/fairyhunter13/oapi-codegen/v2`.
 
 > [!IMPORTANT]
 > `oapi-codegen` moved to its new home with the version tag `v2.3.0`.
@@ -37,7 +37,7 @@ If you are using `v2.3.0` or above, please install like so, using the new module
 
 ```sh
 # for the binary install
-go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
+go install github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen@latest
 ```
 
 ## Install
@@ -53,20 +53,20 @@ This would give you a `tools/tools.go`:
 package main
 
 import (
-	_ "github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen"
+	_ "github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen"
 )
 ```
 
 Then, each invocation of `oapi-codegen` would be used like so:
 
 ```go
-//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen --config=config.yaml ../../api.yaml
+//go:generate go run github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen --config=config.yaml ../../api.yaml
 ```
 
 Alternatively, you can install it as a binary with:
 
 ```sh
-$ go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
+$ go install github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen@latest
 $ oapi-codegen -version
 ```
 
@@ -78,7 +78,7 @@ Which then means you can invoke it like so:
 
 ### Pinning to commits
 
-While the project does not ([yet](https://github.com/oapi-codegen/oapi-codegen/issues/1519)) have a defined release cadence, there may be cases where you want to pull in yet-unreleased changes to your codebase.
+While the project does not ([yet](https://github.com/fairyhunter13/oapi-codegen/issues/1519)) have a defined release cadence, there may be cases where you want to pull in yet-unreleased changes to your codebase.
 
 Therefore, you may want to pin your dependency on `oapi-codegen` to a given commit hash, rather than a tag.
 
@@ -90,9 +90,9 @@ To do so, you can run:
 
 ```sh
 # pin to the latest version on the default branch
-$ go get github.com/oapi-codegen/oapi-codegen/v2@main
-# alternatively, to a commit hash i.e. https://github.com/oapi-codegen/oapi-codegen/commit/71e916c59688a6379b5774dfe5904ec222b9a537
-$ go get github.com/oapi-codegen/oapi-codegen/v2@71e916c59688a6379b5774dfe5904ec222b9a537
+$ go get github.com/fairyhunter13/oapi-codegen/v2@main
+# alternatively, to a commit hash i.e. https://github.com/fairyhunter13/oapi-codegen/commit/71e916c59688a6379b5774dfe5904ec222b9a537
+$ go get github.com/fairyhunter13/oapi-codegen/v2@71e916c59688a6379b5774dfe5904ec222b9a537
 ```
 
 This will then make a change such as:
@@ -103,20 +103,20 @@ index 44f29a4..436a780 100644
 --- go.mod
 +++ go.mod
 @@ -2,21 +2,20 @@
--require github.com/oapi-codegen/oapi-codegen/v2 v2.1.0
-+require github.com/oapi-codegen/oapi-codegen/v2 v2.1.1-0.20240331212514-80f0b978ef16
+-require github.com/fairyhunter13/oapi-codegen/v2 v2.1.0
++require github.com/fairyhunter13/oapi-codegen/v2 v2.1.1-0.20240331212514-80f0b978ef16
 ```
 
 ## Usage
 
 `oapi-codegen` is largely configured using a YAML configuration file, to simplify the number of flags that users need to remember, and to make reading the `go:generate` command less daunting.
 
-For full details of what is supported, it's worth checking out [the GoDoc for `codegen.Configuration`](https://pkg.go.dev/github.com/oapi-codegen/oapi-codegen/v2/pkg/codegen#Configuration).
+For full details of what is supported, it's worth checking out [the GoDoc for `codegen.Configuration`](https://pkg.go.dev/github.com/fairyhunter13/oapi-codegen/v2/pkg/codegen#Configuration).
 
 We also have [a JSON Schema](configuration-schema.json) that can be used by IDEs/editors with the Language Server Protocol (LSP) to perform intelligent suggestions, i.e.:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: api
 # ...
 ```
@@ -125,7 +125,7 @@ package: api
 
 Although we strive to retain backwards compatibility - as a project that's using a stable API per SemVer - there are sometimes opportunities we must take to fix a bug that could cause a breaking change for [people relying upon the behaviour](https://xkcd.com/1172/).
 
-In this case, we will expose a [compatibility option](https://pkg.go.dev/github.com/oapi-codegen/oapi-codegen/v2/pkg/codegen#CompatibilityOptions) to restore old behaviour.
+In this case, we will expose a [compatibility option](https://pkg.go.dev/github.com/fairyhunter13/oapi-codegen/v2/pkg/codegen#CompatibilityOptions) to restore old behaviour.
 
 ## Features
 
@@ -372,7 +372,7 @@ We can see that this provides the best means to focus on the implementation of t
 - Single-file output
 - Support multiple OpenAPI files by having a package-per-OpenAPI file
 - Support of OpenAPI 3.0
-  - OpenAPI 3.1 support is [awaiting upstream support](https://github.com/oapi-codegen/oapi-codegen/issues/373)
+  - OpenAPI 3.1 support is [awaiting upstream support](https://github.com/fairyhunter13/oapi-codegen/issues/373)
   - Note that this does not include OpenAPI 2.0 (aka Swagger)
 - Extract parameters from requests, to reduce work required by your implementation
 - Implicit `additionalProperties` are ignored by default ([more details](#additional-properties-additionalproperties))
@@ -704,7 +704,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/minimal-server/stdhttp/api"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/minimal-server/stdhttp/api"
 )
 
 func main() {
@@ -841,7 +841,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/minimal-server/chi/api"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/minimal-server/chi/api"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -968,7 +968,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/minimal-server/gorillamux/api"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/minimal-server/gorillamux/api"
 	"github.com/gorilla/mux"
 )
 
@@ -1099,7 +1099,7 @@ Now we've got our implementation, we can then write the following code to wire i
 import (
 	"log"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/minimal-server/echo/api"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/minimal-server/echo/api"
 	"github.com/labstack/echo/v4"
 )
 
@@ -1216,7 +1216,7 @@ Now we've got our implementation, we can then write the following code to wire i
 import (
 	"log"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/minimal-server/fiber/api"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/minimal-server/fiber/api"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -1331,7 +1331,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/minimal-server/gin/api"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/minimal-server/gin/api"
 	"github.com/gin-gonic/gin"
 )
 
@@ -1455,7 +1455,7 @@ Now we've got our implementation, we can then write the following code to wire i
 import (
 	"log"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/minimal-server/iris/api"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/minimal-server/iris/api"
 	"github.com/kataras/iris/v12"
 )
 
@@ -1502,7 +1502,7 @@ You can see a little more detail of the generated code in the ["What does it loo
 > To configure the strict server generation, you must specify another server to be generated. For instance:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: api
 generate:
   # NOTE another server must be added!
@@ -1577,7 +1577,7 @@ components:
 And a `cfg.yaml`:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: client
 output: client.gen.go
 generate:
@@ -1590,7 +1590,7 @@ And a `generate.go`:
 ```go
 package client
 
-//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen -config cfg.yaml api.yaml
+//go:generate go run github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen -config cfg.yaml api.yaml
 ```
 
 This would then generate:
@@ -1666,7 +1666,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/examples/client"
+	"github.com/fairyhunter13/oapi-codegen/v2/examples/client"
 )
 
 func TestClient_canCall() {
@@ -1744,7 +1744,7 @@ paths:
           content:
             application/json:
               # NOTE that this anonymous object is /not/ generated because it's an anonymous, but would be generated if using `generate: client`
-              # See https://github.com/oapi-codegen/oapi-codegen/issues/1512
+              # See https://github.com/fairyhunter13/oapi-codegen/issues/1512
               schema:
                 type: object
                 properties:
@@ -1777,7 +1777,7 @@ components:
 And a `cfg.yaml`:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: onlymodels
 output: only-models.gen.go
 generate:
@@ -1789,7 +1789,7 @@ And a `generate.go`:
 ```go
 package onlymodels
 
-//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen -config cfg.yaml api.yaml
+//go:generate go run github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen -config cfg.yaml api.yaml
 ```
 
 This would then generate:
@@ -1806,7 +1806,7 @@ type Client struct {
 If you wish to also generate the `Unreferenced` type, you would need the following `cfg.yaml`:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: onlymodels
 output: only-models.gen.go
 generate:
@@ -1908,14 +1908,14 @@ So how do we get `oapi-codegen` to generate our code?
 To get `oapi-codegen`'s single-package support working, we need multiple calls to `oapi-codegen`, one call per OpenAPI spec file:
 
 ```sh
-$ go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen -config cfg-api.yaml ../admin/api.yaml
-$ go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen -config cfg-user.yaml ../common/api.yaml
+$ go run github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen -config cfg-api.yaml ../admin/api.yaml
+$ go run github.com/fairyhunter13/oapi-codegen/v2/cmd/oapi-codegen -config cfg-user.yaml ../common/api.yaml
 ```
 
 This therefore means that we need multiple configuration files, such as `cfg-api.yaml`:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: samepackage
 output: server.gen.go
 generate:
@@ -1932,7 +1932,7 @@ import-mapping:
 And then our `cfg-user.yaml`:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: samepackage
 output: user.gen.go
 generate:
@@ -1962,7 +1962,7 @@ To get `oapi-codegen`'s multi-package support working, we need to set up our dir
 We could start with our configuration file for our admin API spec:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 # admin/cfg.yaml
 package: admin
 output: server.gen.go
@@ -1984,7 +1984,7 @@ error generating code: error creating operation definitions: error generating re
 This is because `oapi-codegen` requires the `import-mapping`:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: admin
 output: server.gen.go
 generate:
@@ -1995,7 +1995,7 @@ output-options:
   skip-prune: true
 import-mapping:
   # for a given file/URL that is $ref'd, point `oapi-codegen` to the Go package that this spec is generated into, to perform Go package imports
-  ../common/api.yaml: github.com/oapi-codegen/oapi-codegen/v2/examples/import-mapping/common
+  ../common/api.yaml: github.com/fairyhunter13/oapi-codegen/v2/examples/import-mapping/common
 ```
 
 This will then generate the following code:
@@ -2005,7 +2005,7 @@ package admin
 
 import (
 	// ...
-	externalRef0 "github.com/oapi-codegen/oapi-codegen/v2/examples/import-mapping/common"
+	externalRef0 "github.com/fairyhunter13/oapi-codegen/v2/examples/import-mapping/common"
 )
 
 // User defines model for User.
@@ -2096,7 +2096,7 @@ actions:
 And our configuration file for `oapi-codegen`:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 package: api
 output: ping.gen.go
 generate:
@@ -2144,7 +2144,7 @@ However, you lose the ability to understand the three cases, as there's no way t
 - is this field `null`? (Can be checked with `S.Field == nil`)
 - does this field have a value? (`S.Field != nil && *S.Field == "123"`)
 
-As of `oapi-codegen` [v2.1.0](https://github.com/oapi-codegen/oapi-codegen/releases/tag/v2.1.0) it is now possible to represent this with the `nullable.Nullable` type from [our new library, oapi-codegen/nullable](https://github.com/oapi-codegen/nullable).
+As of `oapi-codegen` [v2.1.0](https://github.com/fairyhunter13/oapi-codegen/releases/tag/v2.1.0) it is now possible to represent this with the `nullable.Nullable` type from [our new library, oapi-codegen/nullable](https://github.com/oapi-codegen/nullable).
 
 If you configure your generator's Output Options to opt-in to this behaviour, as so:
 
@@ -3088,7 +3088,7 @@ Middleware library
 </table>
 
 > [!NOTE]
-> It is [not currently possible](https://github.com/oapi-codegen/oapi-codegen/issues/1038) to validate the HTTP response with a middleware.
+> It is [not currently possible](https://github.com/fairyhunter13/oapi-codegen/issues/1038) to validate the HTTP response with a middleware.
 
 > [!NOTE]
 > We're also [exploring](https://github.com/oapi-codegen/exp/issues/1) the use of [libopenapi-validator](https://github.com/pb33f/libopenapi-validator/) for request/response validation middleware
@@ -3104,7 +3104,7 @@ If you're using a specification with [Security Schemes](https://spec.openapis.or
 >
 > To perform authentication, you will need to use the [validation middleware](#request-response-validation-middleware).
 >
-> In the future, we plan to [implement server-side validation in the generated code](https://github.com/oapi-codegen/oapi-codegen/issues/1524)
+> In the future, we plan to [implement server-side validation in the generated code](https://github.com/fairyhunter13/oapi-codegen/issues/1524)
 
 To see how this can work, check out the [authenticated API example](examples/authenticated-api/echo).
 
@@ -3120,7 +3120,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/oapi-codegen/oapi-codegen/v2/pkg/securityprovider"
+	"github.com/fairyhunter13/oapi-codegen/v2/pkg/securityprovider"
 )
 
 func main() {
@@ -3142,7 +3142,7 @@ func main() {
 }
 ```
 
-Notice that we're using a pre-built provider from the [`pkg/securityprovider` package](https://pkg.go.dev/github.com/oapi-codegen/oapi-codegen/v2/pkg/securityprovider), which has some inbuilt support for other types of authentication, too.
+Notice that we're using a pre-built provider from the [`pkg/securityprovider` package](https://pkg.go.dev/github.com/fairyhunter13/oapi-codegen/v2/pkg/securityprovider), which has some inbuilt support for other types of authentication, too.
 
 ## Custom code generation
 
@@ -3158,7 +3158,7 @@ You can specify, through your configuration file, the `output-options.user-templ
 Within your configuration file, you can specify relative or absolute paths to a file to reference for the template, such as:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 # ...
 output-options:
   user-templates:
@@ -3179,23 +3179,23 @@ It is also possible to use HTTPS URLs.
 >
 > See [this blog post](https://www.jvt.me/posts/2024/04/27/github-actions-update-file/) for an example of how to use GitHub Actions to manage the updates of files across repos
 >
-> This will be disabled by default (but possible to turn back on via configuration) [in the future](https://github.com/oapi-codegen/oapi-codegen/issues/1564)
+> This will be disabled by default (but possible to turn back on via configuration) [in the future](https://github.com/fairyhunter13/oapi-codegen/issues/1564)
 
 To use it, you can use the following configuration:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 # ...
 output-options:
   user-templates:
     # The following are referencing a version of the default client-with-responses.tmpl file, but loaded in through GitHub's raw.githubusercontent.com. The general form to use raw.githubusercontent.com is as follows https://raw.githubusercontent.com/<username>/<project>/<commitish>/path/to/template/template.tmpl
 
     # Alternatively using raw.githubusercontent.com with a hash
-    client-with-responses.tmpl: https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/ad5eada4f3ccc28a88477cef62ea21c17fc8aa01/pkg/codegen/templates/client-with-responses.tmpl
+    client-with-responses.tmpl: https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/ad5eada4f3ccc28a88477cef62ea21c17fc8aa01/pkg/codegen/templates/client-with-responses.tmpl
     # Alternatively using raw.githubusercontent.com with a tag
-    client-with-responses.tmpl: https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/v2.1.0/pkg/codegen/templates/client-with-responses.tmpl
+    client-with-responses.tmpl: https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/v2.1.0/pkg/codegen/templates/client-with-responses.tmpl
     # Alternatively using raw.githubusercontent.com with a branch
-    client-with-responses.tmpl: https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/master/pkg/codegen/templates/client-with-responses.tmpl
+    client-with-responses.tmpl: https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/master/pkg/codegen/templates/client-with-responses.tmpl
 ```
 
 > [!WARNING]
@@ -3206,7 +3206,7 @@ output-options:
 It's also possible to set the templates inline in the configuration file:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 # ...
 output-options:
   user-templates:
@@ -3224,7 +3224,7 @@ output-options:
 
 ### Using the Go package
 
-Alternatively, you are able to use the underlying code generation as a package, which [will be documented in the future](https://github.com/oapi-codegen/oapi-codegen/issues/1487).
+Alternatively, you are able to use the underlying code generation as a package, which [will be documented in the future](https://github.com/fairyhunter13/oapi-codegen/issues/1487).
 
 ## Additional Properties (`additionalProperties`)
 
@@ -3233,7 +3233,7 @@ Alternatively, you are able to use the underlying code generation as a package, 
 For simplicity, and to remove a fair bit of duplication and boilerplate, `oapi-codegen` decides to ignore the implicit `additionalProperties: true`, and instead requires you to specify the `additionalProperties` key to generate the boilerplate.
 
 > [!NOTE]
-> In the future [this will be possible](https://github.com/oapi-codegen/oapi-codegen/issues/1514) to disable this functionality, and honour the implicit `additionalProperties: true`
+> In the future [this will be possible](https://github.com/fairyhunter13/oapi-codegen/issues/1514) to disable this functionality, and honour the implicit `additionalProperties: true`
 
 Below you can see some examples of how `additionalProperties` affects the generated code.
 
@@ -3856,7 +3856,7 @@ components:
             - id
 
     # allOf performs a union of all types defined, but if there's a duplicate field defined, it'll be overwritten by the last schema
-    # https://github.com/oapi-codegen/oapi-codegen/issues/1569
+    # https://github.com/fairyhunter13/oapi-codegen/issues/1569
     IdentityWithDuplicateField:
       allOf:
         # `issuer` will be ignored
@@ -4091,7 +4091,7 @@ By default, `oapi-codegen` will generate everything from the specification.
 If you'd like to reduce what's generated, you can use one of a few options in [the configuration file](#usage) to tune the generation of the resulting output:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fairyhunter13/oapi-codegen/HEAD/configuration-schema.json
 output-options:
   include-tags: []
   exclude-tags: []
@@ -4100,7 +4100,7 @@ output-options:
   exclude-schemas: []
 ```
 
-Check [the docs](https://pkg.go.dev/github.com/oapi-codegen/oapi-codegen/v2/pkg/codegen#OutputOptions) for more details of usage.
+Check [the docs](https://pkg.go.dev/github.com/fairyhunter13/oapi-codegen/v2/pkg/codegen#OutputOptions) for more details of usage.
 
 ### Should I commit the generated code?
 
@@ -4128,9 +4128,9 @@ We'll be aware of the issue, and will work to update both the core `oapi-codegen
 
 ## Sponsors
 
-For the most part, `oapi-codegen` is maintained in two busy peoples' free time. As noted in [Creating a more sustainable model for `oapi-codegen` in the future](https://github.com/oapi-codegen/oapi-codegen/discussions/1606), we're looking to make this a more sustainable project in the future.
+For the most part, `oapi-codegen` is maintained in two busy peoples' free time. As noted in [Creating a more sustainable model for `oapi-codegen` in the future](https://github.com/fairyhunter13/oapi-codegen/discussions/1606), we're looking to make this a more sustainable project in the future.
 
-We're very appreciative of [the many contributors over the years](https://github.com/oapi-codegen/oapi-codegen/graphs/contributors) and the ongoing use of the project 💜
+We're very appreciative of [the many contributors over the years](https://github.com/fairyhunter13/oapi-codegen/graphs/contributors) and the ongoing use of the project 💜
 
 Please consider sponsoring us through GitHub Sponsors either [on the organisation](https://github.com/sponsors/oapi-codegen/) or [directly for Jamie](https://github.com/sponsors/jamietanna/), which helps work towards us being able to maintain the project long term.
 
